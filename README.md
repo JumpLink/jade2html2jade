@@ -1,4 +1,4 @@
-# html-beautifier
-Just a simple HTML beautifier and printer to use [online](http://jumplink.github.io/html-beautifier/) or [offline](https://github.com/JumpLink/html-beautifier/releases/latest).
+# Jade2HTML2Jade
+Parse Jade to HTML and HTML to Jade [online](http://jumplink.github.io/jade2html2jade/) or [offline](https://github.com/JumpLink/jade2html2jade/releases).
 
-![html-beautifier.png](html-beautifier.png)
+![jade2html2jade.png](jade2html2jade.png)
