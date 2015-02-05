@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>HTML2Jade2HTML</title>
+
+    <link rel="stylesheet" type="text/css"; href="ThirdParty/bootstrap-3.3.2/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css"; href="ThirdParty/bootstrap-3.3.2/css/bootstrap-theme.css">
+    <link rel="stylesheet" type="text/css"; href="ThirdParty/codemirror-4.12/lib/codemirror.css">
+    <link rel="stylesheet" type="text/css"; href="ThirdParty/layout-1.4.3/source/stable/layout-default.css">
+    <link rel="stylesheet" type="text/css"; href="Stylesheet/style.css">
+    <link rel="stylesheet" type="text/css"; media="print" href="Stylesheet/print.css">
+    
+    <!--<script type="text/javascript" src="ThirdParty/jquery-2.1.3.js"></script>-->
+    <script type="text/javascript" src="ThirdParty/layout-1.4.3/source/jquery/jquery-1.11.1.js"></script>
+    <script type="text/javascript" src="ThirdParty/layout-1.4.3/source/jquery/jquery-ui-1.11.0.js"></script>
+    <script type="text/javascript" src="ThirdParty/bootstrap-3.3.2/js/bootstrap.js"></script>
+    <script type="text/javascript" src="ThirdParty/codemirror-4.12/lib/codemirror.js"></script>
+    <script type="text/javascript" src="ThirdParty/codemirror-4.12/mode/xml/xml.js"></script>
+    <script type="text/javascript" src="ThirdParty/codemirror-4.12/mode/css/css.js"></script>
+    <script type="text/javascript" src="ThirdParty/codemirror-4.12/mode/javascript/javascript.js"></script>
+    <script type="text/javascript" src="ThirdParty/codemirror-4.12/mode/htmlmixed/htmlmixed.js"></script>
+    <script type="text/javascript" src="ThirdParty/codemirror-4.12/mode/jade/jade.js"></script>
+    <script type="text/javascript" src="ThirdParty/js-beautify-1.5.4/js/lib/beautify.js"></script>
+    <script type="text/javascript" src="ThirdParty/js-beautify-1.5.4/js/lib/beautify-css.js"></script>
+    <script type="text/javascript" src="ThirdParty/js-beautify-1.5.4/js/lib/beautify-html.js"></script>
+    <script type="text/javascript" src="ThirdParty/jade-1.8.0.js"></script>
+	<script type="text/javascript" src="ThirdParty/layout-1.4.3/source/stable/jquery.layout.js"></script>
+	<script type="text/javascript" src="ThirdParty/he/he.js"></script>
+	<script type="text/javascript" src="ThirdParty/html2jade-0.8.1.js"></script>
+	
+</head>
+<body>
+    <!-- UI Layout with Code Editors -->
+    <div id="container">
+        <div class="pane ui-layout-north">
+            <div id="editorJadeWrapper">
+                <textarea id="editorJade" style="display: none;"></textarea>
+            </div>
+        </div>
+    	<div class="pane ui-layout-center">
+            <div id="editorwrapper">
+                <textarea id="editor" style="display: none;"></textarea>
+            </div>
+    	</div>
+    </div>
+
+    <!-- Right-Top Control Button Group -->
+    <div class="btn-group" id="base-btn-group" role="group" aria-label="controlButtonGroupLabel">
+        <button class="btn btn-primary" id="about-button" title="About" data-toggle="modal" data-target="#aboutModal">
+            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+        </button>
+        <button class="btn btn-primary" id="parseJade" onclick="parseJade();" title="Convert Jade to HTML">
+            <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+        </button>
+        <button class="btn btn-primary" id="parseHTML" onclick="parseHTML();" title="Convert HTML to Jade">
+            <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+        </button>
+        <button class="btn btn-primary" id="print-button" title="Beautify and print"  onclick="showPrintModal();">
+            <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+        </button>
+    </div>
+    <!-- About Modal -->
+    <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="printModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                 <div class="modal-header" style="display:flex;padding:5px;" layout="row" layout-align="center">
+                    <button type="button" class="btn btn-primary" ria-label="CloseLabel" data-dismiss="modal" style="padding-right: 20px;">Close</button>
+                    <h4 class="modal-title text-center" id="printModalLabel" style="width:100%;padding-top: 5px;">About HTML Beautifier</h4>
+                    <button type="button" class="btn btn-primary" ria-label="CloseLabel" data-dismiss="modal" style="padding-right: 20px;">Close</button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-center">
+                        Just a simple HTML beautifier and printer.
+                        <br>
+                        <br>
+                        Version 0.6.2
+                        <br>
+                        <br>This software is licensed under the <a href="./LICENSE">MIT License (MIT)</a>.
+                        <br>You can find the source code on <a href="https://github.com/JumpLink/html-beautifier">GitHub</a>.
+                    </p>
+                    <p class="text-center">
+                        I am a programmer and freelancer, just contact me!
+                        <dl class="dl-horizontal">
+                          <dt title="Email"><span class="glyphicon glyphicon-envelope"></span></dt>
+                          <dd><a href="mailto:pascal@jumplink.eu">pascal@jumplink.eu</a></dd>
+                          <dt title="Phone"><span class="glyphicon glyphicon-phone"></span></dt>
+                          <dd><a href="tel:+4915756431988">+49(0)157 56431988</a></dd>
+                          <dt title="Web"><span class="glyphicon glyphicon-home"></span></dt>
+                          <dd><a href="http://www.jumplink.eu/">jumplink.eu</a></dd>
+                        </dl>
+                    </p>
+                    <p class="text-center">Copyright (c) 2015 Pascal Garber</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Print Modal -->
+    <div class="modal fade" id="printModal" tabindex="-1" role="dialog" aria-labelledby="printModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                 <div class="modal-header" style="display:flex;padding:5px;" layout="row" layout-align="center">
+                    <button type="button" class="btn btn-danger" ria-label="Cancel" data-dismiss="modal" style="padding-right: 20px;">Cancel</button>
+                    <h4 class="modal-title text-center" id="printModalLabel" style="width:100%;padding-top: 5px;">Print</h4>
+                    <button type="button" class="btn btn-primary" ria-label="PrintLabel" onclick="preparePrint();" style="padding-right: 20px;">Print</button>
+                    
+                </div>
+                <div class="modal-body">
+                    <form>
+                      <div class="form-group">
+                        <label class="sr-only" for="page-title">Title</label>
+                        <input type="text" class="form-control" id="page-title" placeholder="Enter title">
+                      </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+     <!-- Custom JavaScript -->
+    <script type="text/javascript">
+        console.error = alert;
+        var editor;
+        var editorJade;
+
+        var formatHTML = function () {
+            var options = {
+              'indent_inner_html': true,
+              'indent_size': 2,
+              'indent_char': ' ',
+              'wrap_line_length': 78,
+              'brace_style': 'expand',
+              'unformatted': ['a', 'sub', 'sup', 'b', 'i', 'u'],
+              'preserve_newlines': true,
+              'max_preserve_newlines': 5,
+              'indent_handlebars': false
+            };
+            var htmlString = editor.getValue();
+            var cleanHtmlString = html_beautify(htmlString, options);
+            editor.setValue(cleanHtmlString);
+        }
+        
+        var parseJade = function () {
+            var options = {
+                pretty: true
+            };
+            var jadeString = editorJade.getValue();
+            var htmlString = jade.render(jadeString, options);
+            editor.setValue(htmlString);
+            formatHTML();
+        }
+        
+        var parseHTML = function () {
+            var htmlString = editor.getValue();
+            Html2Jade.convertHtml(htmlString, {selectById: true}, function (err, jadeString) {
+              if(err) {
+                  console.error(err);
+              } else {
+                  editorJade.setValue(jadeString);
+              }
+            });
+        }
+        var setPageTilte = function () {
+            var title = $('#page-title').val();
+            console.log(title);
+            document.title = title;
+        }
+
+        var focusPageInput = function () {
+            $('#page-title').focus();
+        }
+
+        var showPrintModal = function () {
+            $('#printModal').modal('show');
+        }
+
+        var hidePrintModal = function () {
+            $('#printModal').modal('hide');
+        }
+
+        var preparePrint = function () {
+            editor.setOption("lineWrapping", true );
+            formatHTML();
+            setPageTilte();
+            hidePrintModal();
+            window.print();
+        }
+
+        $(document).ready(function() {
+            var optionsJade = {
+                lineNumbers: true,
+                mode: "jade",
+                viewportMargin: Infinity,
+                lineWrapping: false,
+            }
+            var options = {
+                lineNumbers: true,
+                mode: "htmlmixed",
+                viewportMargin: Infinity,
+                lineWrapping: false,
+            }
+            $('#container').layout(); // makes border drag-and-scaleable
+            editorJade = CodeMirror.fromTextArea(document.getElementById("editorJade"),optionsJade);
+            editor = CodeMirror.fromTextArea(document.getElementById("editor"),options);
+        });
+
+        $('#printModal').on('shown.bs.modal', function () {
+            focusPageInput();
+        })
+    </script>
+</body>
+</html> 
