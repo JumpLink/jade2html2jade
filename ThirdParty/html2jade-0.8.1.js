@@ -4,11 +4,20 @@
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  FS = require("fs");
+    var isNode = false; 
 
-  Path = require("path");
+    if(typeof module !== 'undefined' && module.exports) {
+      isNode = true;
+    };
 
-  Ent = require("he");
+  if(isNode) {
+    FS = require("fs");
+    Path = require("path");
+    Ent = require("he");
+  } else {
+    Ent = he;
+  }
+
 
   scope = typeof exports !== "undefined" && exports !== null ? exports : this.Html2Jade != null ? this.Html2Jade : this.Html2Jade = {};
 
@@ -29,7 +38,9 @@
   Parser = (function() {
     function Parser(options) {
       this.options = options != null ? options : {};
-      this.jsdom = require('jsdom-little');
+      if(isNode) {
+        this.jsdom = require('jsdom-little');
+      }
     }
 
     Parser.prototype.parse = function(arg, cb) {
@@ -39,7 +50,16 @@
         if (this.options.inputType === "file") {
           arg = FS.readFileSync(arg, "utf8");
         }
-        return this.jsdom.env(arg, cb);
+        if(isNode) {
+          return this.jsdom.env(arg, cb);
+        } else {
+          var window = {};
+          // http://stackoverflow.com/questions/3103962/converting-html-string-into-dom-elements
+          var parser = new DOMParser();
+          window.document = parser.parseFromString(arg, "text/xml");
+          return cb(null, window);
+        }
+        
       }
     };
 
@@ -721,5 +741,9 @@
       return cb(null, output.final());
     }
   };
+  
+  if(!isNode) {
+    window.Html2Jade = scope;
+  }
 
 }).call(this);
