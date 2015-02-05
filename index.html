@@ -167,7 +167,7 @@
         }
         
         var showOwnCode = function () {
-            var htmlString = document.getElementById('aboutModal').outerHTML;
+            var htmlString = document.documentElement.innerHTML;
             var cleanHtmlString = html_beautify(htmlString, htmlBeautifyOptions);
             editor.setValue(cleanHtmlString);
             parseHTML();

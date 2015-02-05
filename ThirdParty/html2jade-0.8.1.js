@@ -56,7 +56,7 @@
           var window = {};
           // http://stackoverflow.com/questions/3103962/converting-html-string-into-dom-elements
           var parser = new DOMParser();
-          window.document = parser.parseFromString(arg, "text/xml");
+          window.document = parser.parseFromString(arg, "text/html");
           return cb(null, window);
         }
         
