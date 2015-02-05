@@ -51,6 +51,9 @@
         <button class="btn btn-success" id="about-button" title="About" data-toggle="modal" data-target="#aboutModal">
             <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
         </button>
+        <button class="btn btn-danger" id="trashCode" onclick="trashCode();" title="Remove the code">
+            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+        </button>
         <button class="btn btn-success" id="parseJade" onclick="showOwnCode();" title="Generate example HTML and Jade code">
             <span class="glyphicon glyphicon-tower" aria-hidden="true"></span>
         </button>
@@ -78,7 +81,7 @@
                         Parse Jade to HTML and HTML to Jade
                         <br />
                         <br />
-                        Version 0.0.1
+                        Version 0.0.2
                         <br />
                         <br />This software is licensed under the <a href="./LICENSE">MIT License (MIT)</a>.
                         <br />You can find the source code on <a href="https://github.com/JumpLink/jade2html2jade">GitHub</a>.
@@ -137,12 +140,14 @@
           'indent_handlebars': false
         };
 
+        // auto format / beautify the html code in html editor
         var formatHTML = function () {
             var htmlString = editor.getValue();
             var cleanHtmlString = html_beautify(htmlString, htmlBeautifyOptions);
             editor.setValue(cleanHtmlString);
         }
         
+        // convert jade from jade edtor to html in html editor
         var parseJade = function () {
             var options = {
                 pretty: true
@@ -153,6 +158,7 @@
             formatHTML();
         }
         
+        // convert html from html edtor to jade in jade editor
         var parseHTML = function () {
             var htmlString = editor.getValue();
             Html2Jade.convertHtml(htmlString, {selectById: true}, function (err, jadeString) {
@@ -164,6 +170,21 @@
             });
         }
         
+        // Just for experiments
+        var parseHTMLDocument = function () {
+            var htmlString = editor.getValue();
+            var parser = new DOMParser();
+            var htmlEditorDocument = parser.parseFromString(htmlString, "text/html");
+            Html2Jade.convertDocument(htmlEditorDocument, {}, function (err, jadeString) {
+              if(err) {
+                  console.error(err);
+              } else {
+                  editorJade.setValue(jadeString);
+              }
+            });
+        }
+
+        // Load the HTML of this App into the HTML and Jade Editor
         var showOwnCode = function () {
             var htmlString = document.documentElement.innerHTML;
             var cleanHtmlString = html_beautify(htmlString, htmlBeautifyOptions);
@@ -171,10 +192,16 @@
             parseHTML();
         }
         
+        // Set the Html Title to print this in header (e.g. in chrome) 
         var setPageTilte = function () {
             var title = $('#page-title').val();
             console.log(title);
             document.title = title;
+        }
+        
+        var trashCode = function () {
+            editor.setValue('');
+            editorJade.setValue('');
         }
 
         var focusPageInput = function () {

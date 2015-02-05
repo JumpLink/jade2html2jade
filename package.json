@@ -1,19 +1,19 @@
 {
-  "name": "html2jade2html",
-  "version": "0.0.1",
-  "description": "Just a simple HTML beautifier and printer to use [online](http://jumplink.github.io/html-beautifier/) or [offline](https://github.com/JumpLink/html-beautifier/releases/latest).",
+  "name": "jade2html2jade",
+  "version": "0.0.2",
+  "description": "Parse Jade to HTML and HTML to Jade",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/JumpLink/html2jade.git"
+    "url": "https://github.com/JumpLink/jade2html2jade"
   },
-  "author": "Pascal Garber",
+  "author": "Pascal Garber <pascal@jumplink.eu>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/JumpLink/html2jade/issues"
+    "url": "https://github.com/JumpLink/jade2html2jade/issues"
   },
-  "homepage": "https://github.com/JumpLink/html2jade"
+  "homepage": "https://github.com/JumpLink/jade2html2jade"
 }

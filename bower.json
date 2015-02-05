@@ -1,7 +1,7 @@
 {
-  "name": "html2jade2html",
-  "version": "0.0.1",
-  "homepage": "https://github.com/JumpLink/html2jade",
+  "name": "jade2html2jade",
+  "version": "0.0.2",
+  "homepage": "https://github.com/JumpLink/jade2html2jade",
   "authors": [
     "Pascal Garber <pascal@jumplink.eu>"
   ],

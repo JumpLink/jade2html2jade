@@ -1,6 +1,7 @@
 # Jade2HTML2Jade
-Parse Jade to HTML and HTML to Jade [online](http://jumplink.github.io/jade2html2jade/) or [offline](https://github.com/JumpLink/jade2html2jade/releases).
+Parse Jade to HTML and HTML to [Jade](http://jade-lang.com/) [online](http://jumplink.github.io/jade2html2jade/) or [offline](https://github.com/JumpLink/jade2html2jade/releases).
 
 ![jade2html2jade.png](jade2html2jade.png)
 
-Jade is a template language, see http://jade-lang.com/
+See also
+ * [html-beautifier](https://github.com/JumpLink/html-beautifier)
