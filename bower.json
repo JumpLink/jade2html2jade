@@ -17,5 +17,8 @@
     "ThirdParty",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "html2jade": "jumplink/html2jade#master"
+  }
 }

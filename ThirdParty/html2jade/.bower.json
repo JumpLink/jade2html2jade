@@ -1,0 +1,13 @@
+{
+  "name": "html2jade",
+  "homepage": "https://github.com/jumplink/html2jade",
+  "_release": "3011009825",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "3011009825e508361d203beeef08ec07b2f2479b"
+  },
+  "_source": "git://github.com/jumplink/html2jade.git",
+  "_target": "master",
+  "_originalSource": "jumplink/html2jade"
+}
