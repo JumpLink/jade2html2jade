@@ -1,0 +1,13 @@
+.DS_Store
+.idea
+lib-cov
+testing
+node_modules
+lib-cov
+coverage
+cov-pt*
+npm-debug.log
+/test/output
+/test/temp
+/docs/out
+.release.json

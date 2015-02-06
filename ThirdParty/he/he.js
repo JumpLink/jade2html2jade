@@ -1,4 +1,4 @@
-/*! http://mths.be/he v0.4.1 by @mathias | MIT license */
+/*! http://mths.be/he v0.5.0 by @mathias | MIT license */
 ;(function(root) {
 
 	// Detect free variables `exports`.
@@ -37,7 +37,7 @@
 		'&': '&amp;',
 		'\'': '&#x27;',
 		'<': '&lt;',
-		// See http://mathiasbynens.be/notes/ambiguous-ampersands: in HTML, the
+		// See https://mathiasbynens.be/notes/ambiguous-ampersands: in HTML, the
 		// following is not strictly necessary unless it’s part of a tag or an
 		// unquoted attribute value. We’re only escaping it to support those
 		// situations, and for XML support.
@@ -141,6 +141,7 @@
 		}
 		var encodeEverything = options.encodeEverything;
 		var useNamedReferences = options.useNamedReferences;
+		var allowUnsafeSymbols = options.allowUnsafeSymbols;
 		if (encodeEverything) {
 			// Encode ASCII symbols.
 			string = string.replace(regexAsciiWhitelist, function(symbol) {
@@ -170,9 +171,11 @@
 		} else if (useNamedReferences) {
 			// Apply named character references.
 			// Encode `<>"'&` using named character references.
-			string = string.replace(regexEscape, function(string) {
-				return '&' + encodeMap[string] + ';'; // no need to check `has()` here
-			});
+			if (!allowUnsafeSymbols) {
+				string = string.replace(regexEscape, function(string) {
+					return '&' + encodeMap[string] + ';'; // no need to check `has()` here
+				});
+			}
 			// Shorten escapes that represent two symbols, of which at least one is
 			// `<>"'&`.
 			string = string
@@ -183,7 +186,7 @@
 				// Note: there is no need to check `has(encodeMap, string)` here.
 				return '&' + encodeMap[string] + ';';
 			});
-		} else {
+		} else if (!allowUnsafeSymbols) {
 			// Encode `<>"'&` using hexadecimal escapes, now that they’re not handled
 			// using named character references.
 			string = string.replace(regexEscape, hexEscape);
@@ -191,7 +194,7 @@
 		return string
 			// Encode astral symbols.
 			.replace(regexAstralSymbols, function($0) {
-				// http://mathiasbynens.be/notes/javascript-encoding#surrogate-formulae
+				// https://mathiasbynens.be/notes/javascript-encoding#surrogate-formulae
 				var high = $0.charCodeAt(0);
 				var low = $0.charCodeAt(1);
 				var codePoint = (high - 0xD800) * 0x400 + low - 0xDC00 + 0x10000;
@@ -203,6 +206,7 @@
 	};
 	// Expose default options (so they can be overridden globally).
 	encode.options = {
+		'allowUnsafeSymbols': false,
 		'encodeEverything': false,
 		'strict': false,
 		'useNamedReferences': false
@@ -293,7 +297,7 @@
 	/*--------------------------------------------------------------------------*/
 
 	var he = {
-		'version': '0.4.1',
+		'version': '0.5.0',
 		'encode': encode,
 		'decode': decode,
 		'escape': escape,

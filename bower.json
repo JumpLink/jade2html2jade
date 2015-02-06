@@ -1,6 +1,7 @@
 {
   "name": "jade2html2jade",
-  "version": "0.0.2",
+  "version": "0.1.0",
+  "description": "Web Application to converts Jade into HTML and back",
   "homepage": "https://github.com/JumpLink/jade2html2jade",
   "authors": [
     "Pascal Garber <pascal@jumplink.eu>"
@@ -19,6 +20,12 @@
     "tests"
   ],
   "dependencies": {
-    "html2jade": "jumplink/html2jade#master"
+    "html2jade": "donpark/html2jade#~0.8.2",
+    "js-beautify": "~1.5.4",
+    "layout": "allpro/layout#~1.4.3",
+    "codemirror": "~4.12.0",
+    "bootstrap": "~3.3.2",
+    "he": "~0.5.0",
+    "jade": "~1.9.1"
   }
 }

@@ -8,13 +8,18 @@ html, body {
 .CodeMirror {
   height: auto;
 }
-#editorwrapper, #editorJadeWrapper {
+
+#editor-jade, #editor {
+  display: none;
+}
+
+#editor-wrapper, #editor-jade-wrapper {
   width:100%;
   height: auto;
 }
 
-#editorJadeWrapper {
-  min-height: 150px;
+#editor-jade-wrapper {
+  min-height: 300px;
 }
 
 #base-btn-group {
@@ -22,6 +27,19 @@ html, body {
   top: 10px;
   right: 50px;
   z-index: 100;
+  opacity: 0.3;
+  -webkit-transition:opacity 300ms ease-out;
+  -moz-transition:opacity 300ms ease-out;
+  -o-transition:opacity 300ms ease-out;
+  transition:opacity 300ms ease-out;
+}
+
+#base-btn-group:hover {
+  opacity: 1;
+  -webkit-transition:opacity 300ms ease-out;
+  -moz-transition:opacity 300ms ease-out;
+  -o-transition:opacity 300ms ease-out;
+  transition:opacity 300ms ease-out;
 }
 
 #container {

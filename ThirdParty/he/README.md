@@ -1,6 +1,6 @@
-# he [![Build status](https://travis-ci.org/mathiasbynens/he.svg?branch=master)](https://travis-ci.org/mathiasbynens/he) [![Dependency status](https://gemnasium.com/mathiasbynens/he.svg)](https://gemnasium.com/mathiasbynens/he)
+# he [![Build status](https://travis-ci.org/mathiasbynens/he.svg?branch=master)](https://travis-ci.org/mathiasbynens/he) [![Code coverage status](http://img.shields.io/coveralls/mathiasbynens/he/master.svg)](https://coveralls.io/r/mathiasbynens/he) [![Dependency status](https://gemnasium.com/mathiasbynens/he.svg)](https://gemnasium.com/mathiasbynens/he)
 
-_he_ (for “HTML entities”) is a robust HTML entity encoder/decoder written in JavaScript. It supports [all standardized named character references as per HTML](http://www.whatwg.org/specs/web-apps/current-work/multipage/named-character-references.html), handles [ambiguous ampersands](http://mathiasbynens.be/notes/ambiguous-ampersands) and other edge cases [just like a browser would](http://www.whatwg.org/specs/web-apps/current-work/multipage/tokenization.html#tokenizing-character-references), has an extensive test suite, and — contrary to many other JavaScript solutions — _he_ handles astral Unicode symbols just fine. [An online demo is available.](http://mothereff.in/html-entities)
+_he_ (for “HTML entities”) is a robust HTML entity encoder/decoder written in JavaScript. It supports [all standardized named character references as per HTML](http://www.whatwg.org/specs/web-apps/current-work/multipage/named-character-references.html), handles [ambiguous ampersands](https://mathiasbynens.be/notes/ambiguous-ampersands) and other edge cases [just like a browser would](http://www.whatwg.org/specs/web-apps/current-work/multipage/tokenization.html#tokenizing-character-references), has an extensive test suite, and — contrary to many other JavaScript solutions — _he_ handles astral Unicode symbols just fine. [An online demo is available.](http://mothereff.in/html-entities)
 
 ## Installation
 
@@ -106,7 +106,7 @@ he.encode('foo © bar ≠ baz 𝌆 qux', {
 
 #### `encodeEverything`
 
-The default value for the `encodeEverything` option is `false`. This means that `encode()` will not use any character references for printable ASCII symbols that don’t need escaping. Set it to `true` to encode every symbol in the input string.
+The default value for the `encodeEverything` option is `false`. This means that `encode()` will not use any character references for printable ASCII symbols that don’t need escaping. Set it to `true` to encode every symbol in the input string. When set to `true`, this option takes precedence over `allowUnsafeSymbols` (i.e. setting the latter to `true` in such a case has no effect).
 
 ```js
 // Using the global default setting (defaults to `false`):
@@ -147,6 +147,17 @@ he.encode('\x01', {
   'strict': true
 });
 // → Parse error
+```
+
+#### `allowUnsafeSymbols`
+
+The default value for the `allowUnsafeSymbols` option is `false`. This means that characters that are unsafe for use in HTML content (`&`, `<`, `>`, `"`, `'`, and `` ` ``) will be encoded. When set to `true`, only non-ASCII characters will be encoded. If the `encodeEverything` option is set to `true`, this option will be ignored.
+
+```js
+he.encode('foo © and & ampersand', {
+  'allowUnsafeSymbols': true
+});
+// → 'foo &#xA9; and & ampersand'
 ```
 
 #### Overriding default `encode` options globally
@@ -308,7 +319,7 @@ After cloning this repository, run `npm install` to install the dependencies nee
 
 Once that’s done, you can run the unit tests in Node using `npm test` or `node tests/tests.js`. To run the tests in Rhino, Ringo, Narwhal, and web browsers as well, use `grunt test`.
 
-To generate [the code coverage report](http://rawgithub.com/mathiasbynens/he/master/coverage/he/he.js.html), use `grunt cover`.
+To generate the code coverage report, use `grunt cover`.
 
 ## Acknowledgements
 
@@ -318,7 +329,7 @@ Thanks to [Simon Pieters](http://simon.html5.org/) ([@zcorpan](https://twitter.c
 
 | [![twitter/mathias](https://gravatar.com/avatar/24e08a9ea84deb17ae121074d0f17125?s=70)](https://twitter.com/mathias "Follow @mathias on Twitter") |
 |---|
-| [Mathias Bynens](http://mathiasbynens.be/) |
+| [Mathias Bynens](https://mathiasbynens.be/) |
 
 ## License
 

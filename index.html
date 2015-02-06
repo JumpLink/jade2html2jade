@@ -6,27 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Jade2HTML2Jade</title>
 
-    <link rel="stylesheet" type="text/css" href="ThirdParty/codemirror-4.12/lib/codemirror.css">
-    <link rel="stylesheet" type="text/css" href="ThirdParty/layout-1.4.3/source/stable/layout-default.css">
-    <link rel="stylesheet" type="text/css" href="ThirdParty/bootstrap-3.3.2/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="ThirdParty/bootstrap-3.3.2/css/bootstrap-theme.css">
+    <link rel="stylesheet" type="text/css" href="ThirdParty/codemirror/lib/codemirror.css">
+    <link rel="stylesheet" type="text/css" href="ThirdParty/layout/source/stable/layout-default.css">
+    <link rel="stylesheet" type="text/css" href="ThirdParty/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="ThirdParty/bootstrap/dist/css/bootstrap-theme.css">
     <link rel="stylesheet" type="text/css" href="Stylesheet/style.css">
     <link rel="stylesheet" type="text/css" media="print" href="Stylesheet/print.css">
     
-    <script type="text/javascript" src="ThirdParty/layout-1.4.3/source/jquery/jquery-1.11.1.js"></script>
-    <script type="text/javascript" src="ThirdParty/layout-1.4.3/source/jquery/jquery-ui-1.11.0.js"></script>
-    <script type="text/javascript" src="ThirdParty/bootstrap-3.3.2/js/bootstrap.js"></script>
-    <script type="text/javascript" src="ThirdParty/codemirror-4.12/lib/codemirror.js"></script>
-    <script type="text/javascript" src="ThirdParty/codemirror-4.12/mode/xml/xml.js"></script>
-    <script type="text/javascript" src="ThirdParty/codemirror-4.12/mode/css/css.js"></script>
-    <script type="text/javascript" src="ThirdParty/codemirror-4.12/mode/javascript/javascript.js"></script>
-    <script type="text/javascript" src="ThirdParty/codemirror-4.12/mode/htmlmixed/htmlmixed.js"></script>
-    <script type="text/javascript" src="ThirdParty/codemirror-4.12/mode/jade/jade.js"></script>
-    <script type="text/javascript" src="ThirdParty/js-beautify-1.5.4/js/lib/beautify.js"></script>
-    <script type="text/javascript" src="ThirdParty/js-beautify-1.5.4/js/lib/beautify-css.js"></script>
-    <script type="text/javascript" src="ThirdParty/js-beautify-1.5.4/js/lib/beautify-html.js"></script>
-    <script type="text/javascript" src="ThirdParty/jade-1.8.0.js"></script>
-	<script type="text/javascript" src="ThirdParty/layout-1.4.3/source/stable/jquery.layout.js"></script>
+    <script type="text/javascript" src="ThirdParty/layout/source/jquery/jquery-1.11.1.js"></script>
+    <script type="text/javascript" src="ThirdParty/layout/source/jquery/jquery-ui-1.11.0.js"></script>
+    <script type="text/javascript" src="ThirdParty/bootstrap/dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="ThirdParty/codemirror/lib/codemirror.js"></script>
+    <script type="text/javascript" src="ThirdParty/codemirror/mode/xml/xml.js"></script>
+    <script type="text/javascript" src="ThirdParty/codemirror/mode/css/css.js"></script>
+    <script type="text/javascript" src="ThirdParty/codemirror/mode/javascript/javascript.js"></script>
+    <script type="text/javascript" src="ThirdParty/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+    <script type="text/javascript" src="ThirdParty/codemirror/mode/jade/jade.js"></script>
+    <script type="text/javascript" src="ThirdParty/js-beautify/js/lib/beautify.js"></script>
+    <script type="text/javascript" src="ThirdParty/js-beautify/js/lib/beautify-css.js"></script>
+    <script type="text/javascript" src="ThirdParty/js-beautify/js/lib/beautify-html.js"></script>
+    <script type="text/javascript" src="ThirdParty/jade/jade.js"></script>
+	<script type="text/javascript" src="ThirdParty/layout/source/stable/jquery.layout.js"></script>
 	<script type="text/javascript" src="ThirdParty/he/he.js"></script>
 	<script type="text/javascript" src="ThirdParty/html2jade/lib/html2jade.js"></script>
 	
@@ -35,26 +35,27 @@
     <!-- UI Layout with Code Editors -->
     <div id="container">
         <div class="pane ui-layout-north">
-            <div id="editorJadeWrapper">
+            <div id="editor-jade-wrapper">
                 <textarea id="editor-jade" style="display: none;"></textarea>
             </div>
         </div>
     	<div class="pane ui-layout-center">
-            <div id="editorwrapper">
+            <div id="editor-wrapper">
                 <textarea id="editor" style="display: none;"></textarea>
             </div>
     	</div>
     </div>
 
     <!-- Right-Top Control Button Group -->
-    <div class="btn-group" id="base-btn-group" role="group" aria-label="controlButtonGroupLabel">
+    <!-- on medium devices and larger -->
+    <div class="btn-group hidden-xs hidden-sm" id="base-btn-group" role="group" aria-label="controlButtonGroupLabel">
         <button class="btn btn-success" id="about-button" title="About" data-toggle="modal" data-target="#aboutModal">
             <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
         </button>
         <button class="btn btn-danger" id="trashCode" onclick="trashCode();" title="Remove the code">
             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
         </button>
-        <button class="btn btn-success" id="parseJade" onclick="showOwnCode();" title="Generate example HTML and Jade code">
+        <button class="btn btn-success" id="showOwnCode" onclick="showOwnCode();" title="Generate example HTML and Jade code">
             <span class="glyphicon glyphicon-tower" aria-hidden="true"></span>
         </button>
         <button class="btn btn-success" id="parseJade" onclick="parseJade();" title="Convert Jade to HTML">
@@ -67,6 +68,29 @@
             <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
         </button>
     </div>
+    <!-- on small devices and smaler -->
+    <div class="btn-group-vertical hidden-md hidden-lg" id="base-btn-group" role="group" aria-label="controlButtonGroupLabel">
+        <button class="btn btn-success" id="about-button" title="About" data-toggle="modal" data-target="#aboutModal">
+            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+        </button>
+        <button class="btn btn-danger" id="trashCode" onclick="trashCode();" title="Remove the code">
+            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+        </button>
+        <button class="btn btn-success" id="showOwnCode" onclick="showOwnCode();" title="Generate example HTML and Jade code">
+            <span class="glyphicon glyphicon-tower" aria-hidden="true"></span>
+        </button>
+        <button class="btn btn-success" id="parseJade" onclick="parseJade();" title="Convert Jade to HTML">
+            <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+        </button>
+        <button class="btn btn-success" id="parseHTML" onclick="parseHTML();" title="Convert HTML to Jade">
+            <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+        </button>
+        <button class="btn btn-success" id="print-button" title="Beautify and print"  onclick="showPrintModal();">
+            <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+        </button>
+    </div>
+    
+    
     <!-- About Modal -->
     <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="printModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -78,10 +102,10 @@
                 </div>
                 <div class="modal-body">
                     <p class="text-center">
-                        Parse Jade to HTML and HTML to Jade
+                        Converts Jade into HTML and back
                         <br />
                         <br />
-                        Version 0.0.2
+                        Version 0.1.0
                         <br />
                         <br />This software is licensed under the <a href="./LICENSE">MIT License (MIT)</a>.
                         <br />You can find the source code on <a href="https://github.com/JumpLink/jade2html2jade">GitHub</a>.
@@ -199,6 +223,7 @@
             document.title = title;
         }
         
+        // Remove the code from the editors
         var trashCode = function () {
             editor.setValue('');
             editorJade.setValue('');

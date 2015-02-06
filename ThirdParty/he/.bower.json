@@ -1,6 +1,6 @@
 {
   "name": "he",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "main": "he.js",
   "ignore": [
     "bin",
@@ -17,14 +17,14 @@
     "package.json"
   ],
   "homepage": "https://github.com/mathiasbynens/he",
-  "_release": "0.4.1",
+  "_release": "0.5.0",
   "_resolution": {
     "type": "version",
-    "tag": "v0.4.1",
-    "commit": "369c532b9624669ac60461c05dbc5e7d2e3e2ef6"
+    "tag": "v0.5.0",
+    "commit": "6606d5dacd888c2cfd9a93dfd6b8b5be4a518c16"
   },
   "_source": "git://github.com/mathiasbynens/he.git",
-  "_target": "0.4.1",
+  "_target": "~0.5.0",
   "_originalSource": "he",
   "_direct": true
 }

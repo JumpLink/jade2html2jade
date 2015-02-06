@@ -1,7 +1,7 @@
 {
   "name": "jade2html2jade",
-  "version": "0.0.2",
-  "description": "Parse Jade to HTML and HTML to Jade",
+  "version": "0.1.0",
+  "description": "Web Application to converts Jade into HTML and back",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

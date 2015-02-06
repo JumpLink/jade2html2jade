@@ -1,0 +1,15 @@
+{
+  "name": "layout",
+  "homepage": "https://github.com/allpro/layout",
+  "version": "1.4.3",
+  "_release": "1.4.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.4.3",
+    "commit": "41179480d72baba53b6e6d3ae5ad470cc5d2388d"
+  },
+  "_source": "git://github.com/allpro/layout.git",
+  "_target": "~1.4.3",
+  "_originalSource": "allpro/layout",
+  "_direct": true
+}
