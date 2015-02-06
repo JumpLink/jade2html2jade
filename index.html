@@ -79,7 +79,7 @@
         </div>
     	<div class="pane ui-layout-center">
             <div id="editor-wrapper">
-                <textarea id="editor" style="display: none;"></textarea>
+                <textarea id="editor-html" style="display: none;"></textarea>
             </div>
     	</div>
     </div>
@@ -143,7 +143,7 @@
                         Converts Jade into HTML and back
                         <br />
                         <br />
-                        Version 0.1.1
+                        Version 0.2.0
                         <br />
                         <br />This software is licensed under the <a href="./LICENSE">MIT License (MIT)</a>.
                         <br />You can find the source code on <a href="https://github.com/JumpLink/jade2html2jade">GitHub</a>.
@@ -187,8 +187,7 @@
     </div>
      <!-- Custom JavaScript -->
     <script type="text/javascript">
-        console.error = alert;
-        var editor;
+        var editorHtml;
         var editorJade;
         var htmlBeautifyOptions = {
           'indent_inner_html': true,
@@ -216,9 +215,9 @@
 
         // auto format / beautify the html code in html editor
         var formatHTML = function () {
-            var htmlString = editor.getValue();
+            var htmlString = editorHtml.getValue();
             var cleanHtmlString = html_beautify(htmlString, htmlBeautifyOptions);
-            editor.setValue(cleanHtmlString);
+            editorHtml.setValue(cleanHtmlString);
         }
         
         // convert jade from jade edtor to html in html editor
@@ -228,13 +227,13 @@
             };
             var jadeString = editorJade.getValue();
             var htmlString = jade.render(jadeString, options);
-            editor.setValue(htmlString);
+            editorHtml.setValue(htmlString);
             formatHTML();
         }
         
         // convert html from html edtor to jade in jade editor
         var parseHTML = function () {
-            var htmlString = editor.getValue();
+            var htmlString = editorHtml.getValue();
             Html2Jade.convertHtml(htmlString, {selectById: true}, function (err, jadeString) {
               if(err) {
                   console.error(err);
@@ -246,7 +245,7 @@
         
         // Just for experiments
         var parseHTMLDocument = function () {
-            var htmlString = editor.getValue();
+            var htmlString = editorHtml.getValue();
             var parser = new DOMParser();
             var htmlEditorDocument = parser.parseFromString(htmlString, "text/html");
             Html2Jade.convertDocument(htmlEditorDocument, {}, function (err, jadeString) {
@@ -262,7 +261,7 @@
         var showOwnCode = function () {
             var htmlString = document.getElementById('aboutModal').innerHTML;
             var cleanHtmlString = html_beautify(htmlString, htmlBeautifyOptions);
-            editor.setValue(cleanHtmlString);
+            editorHtml.setValue(cleanHtmlString);
             parseHTML();
         }
         
@@ -275,7 +274,7 @@
         
         // Remove the code from the editors
         var trashCode = function () {
-            editor.setValue('');
+            editorHtml.setValue('');
             editorJade.setValue('');
         }
 
@@ -292,7 +291,7 @@
         }
 
         var preparePrint = function () {
-            editor.setOption("lineWrapping", true );
+            editorHtml.setOption("lineWrapping", true );
             editorJade.setOption("lineWrapping", true );
             formatHTML();
             setPageTilte();
@@ -305,7 +304,7 @@
             var optionsHtml = jQuery.extend({mode: "htmlmixed"}, generalEditorOptions);
             $('#container').layout(); // makes border drag-and-scaleable
             editorJade = CodeMirror.fromTextArea(document.getElementById("editor-jade"),optionsJade);
-            editor = CodeMirror.fromTextArea(document.getElementById("editor"),optionsHtml);
+            editorHtml = CodeMirror.fromTextArea(document.getElementById("editor-html"),optionsHtml);
         });
 
         $('#printModal').on('shown.bs.modal', function () {
