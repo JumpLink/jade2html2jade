@@ -1,6 +1,6 @@
 {
   "name": "jade2html2jade",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Web Application to converts Jade into HTML and back",
   "main": "index.js",
   "scripts": {

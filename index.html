@@ -7,6 +7,7 @@
     <title>Jade2HTML2Jade</title>
 
     <link rel="stylesheet" type="text/css" href="ThirdParty/codemirror/lib/codemirror.css">
+    <link rel="stylesheet" type="text/css" href="ThirdParty/codemirror/theme/ambiance.css">
     <link rel="stylesheet" type="text/css" href="ThirdParty/layout/source/stable/layout-default.css">
     <link rel="stylesheet" type="text/css" href="ThirdParty/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="ThirdParty/bootstrap/dist/css/bootstrap-theme.css">
@@ -105,7 +106,7 @@
                         Converts Jade into HTML and back
                         <br />
                         <br />
-                        Version 0.1.0
+                        Version 0.1.1
                         <br />
                         <br />This software is licensed under the <a href="./LICENSE">MIT License (MIT)</a>.
                         <br />You can find the source code on <a href="https://github.com/JumpLink/jade2html2jade">GitHub</a>.
@@ -243,6 +244,7 @@
 
         var preparePrint = function () {
             editor.setOption("lineWrapping", true );
+            editorJade.setOption("lineWrapping", true );
             formatHTML();
             setPageTilte();
             hidePrintModal();

@@ -14,7 +14,6 @@ html, body {
 }
 
 #editor-wrapper, #editor-jade-wrapper {
-  width:100%;
   height: auto;
 }
 
@@ -44,7 +43,6 @@ html, body {
 
 #container {
 	height:		100%;
-	width:		100%;
 }
 
 .ui-layout-pane {
