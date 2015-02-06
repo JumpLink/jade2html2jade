@@ -7,6 +7,9 @@
     <title>Jade2HTML2Jade</title>
 
     <link rel="stylesheet" type="text/css" href="ThirdParty/codemirror/lib/codemirror.css">
+    <link rel="stylesheet" type="text/css" href="ThirdParty/codemirror/addon/hint/show-hint.css">
+    <link rel="stylesheet" type="text/css" href="ThirdParty/codemirror/addon/lint/lint.css">
+    <link rel="stylesheet" type="text/css" href="ThirdParty/codemirror/addon/scroll/simplescrollbars.css">
     <link rel="stylesheet" type="text/css" href="ThirdParty/codemirror/theme/ambiance.css">
     <link rel="stylesheet" type="text/css" href="ThirdParty/layout/source/stable/layout-default.css">
     <link rel="stylesheet" type="text/css" href="ThirdParty/bootstrap/dist/css/bootstrap.css">
@@ -16,19 +19,53 @@
     
     <script type="text/javascript" src="ThirdParty/layout/source/jquery/jquery-1.11.1.js"></script>
     <script type="text/javascript" src="ThirdParty/layout/source/jquery/jquery-ui-1.11.0.js"></script>
+    
     <script type="text/javascript" src="ThirdParty/bootstrap/dist/js/bootstrap.js"></script>
+    
+    <!--<script type="text/javascript" src="ThirdParty/jshint/dist/jshint.js"></script>-->
+    
     <script type="text/javascript" src="ThirdParty/codemirror/lib/codemirror.js"></script>
+    
+    <script type="text/javascript" src="ThirdParty/codemirror/addon/hint/anyword-hint.js"></script>
+    <script type="text/javascript" src="ThirdParty/codemirror/addon/hint/css-hint.js"></script>
+    <script type="text/javascript" src="ThirdParty/codemirror/addon/hint/html-hint.js"></script>
+    <script type="text/javascript" src="ThirdParty/codemirror/addon/hint/javascript-hint.js"></script>
+    <script type="text/javascript" src="ThirdParty/codemirror/addon/hint/show-hint.js"></script>
+    
+    <script type="text/javascript" src="ThirdParty/codemirror/addon/scroll/annotatescrollbar.js"></script>
+    <script type="text/javascript" src="ThirdParty/codemirror/addon/scroll/scrollpastend.js"></script>
+    <script type="text/javascript" src="ThirdParty/codemirror/addon/scroll/simplescrollbars.js"></script>
+    
+   
+    <!--<script type="text/javascript" src="ThirdParty/codemirror/addon/lint/css-lint.js"></script>
+    <script type="text/javascript" src="ThirdParty/codemirror/addon/lint/javascript-lint.js"></script>
+    <script type="text/javascript" src="ThirdParty/codemirror/addon/lint/lint.js"></script>-->
+    
+    <script type="text/javascript" src="ThirdParty/codemirror/addon/fold/xml-fold.js"></script>
+    
+    <script type="text/javascript" src="ThirdParty/codemirror/addon/edit/matchbrackets.js"></script>
+    <script type="text/javascript" src="ThirdParty/codemirror/addon/edit/matchtags.js"></script>
+    <script type="text/javascript" src="ThirdParty/codemirror/addon/edit/closebrackets.js"></script>
+    <script type="text/javascript" src="ThirdParty/codemirror/addon/edit/closetag.js"></script>
+    <script type="text/javascript" src="ThirdParty/codemirror/addon/edit/continuelist.js"></script>
+    <script type="text/javascript" src="ThirdParty/codemirror/addon/edit/trailingspace.js"></script>
+    
     <script type="text/javascript" src="ThirdParty/codemirror/mode/xml/xml.js"></script>
     <script type="text/javascript" src="ThirdParty/codemirror/mode/css/css.js"></script>
     <script type="text/javascript" src="ThirdParty/codemirror/mode/javascript/javascript.js"></script>
     <script type="text/javascript" src="ThirdParty/codemirror/mode/htmlmixed/htmlmixed.js"></script>
     <script type="text/javascript" src="ThirdParty/codemirror/mode/jade/jade.js"></script>
+    
     <script type="text/javascript" src="ThirdParty/js-beautify/js/lib/beautify.js"></script>
     <script type="text/javascript" src="ThirdParty/js-beautify/js/lib/beautify-css.js"></script>
     <script type="text/javascript" src="ThirdParty/js-beautify/js/lib/beautify-html.js"></script>
+    
     <script type="text/javascript" src="ThirdParty/jade/jade.js"></script>
+    
 	<script type="text/javascript" src="ThirdParty/layout/source/stable/jquery.layout.js"></script>
+	
 	<script type="text/javascript" src="ThirdParty/he/he.js"></script>
+	
 	<script type="text/javascript" src="ThirdParty/html2jade/lib/html2jade.js"></script>
 	
 </head>
@@ -162,7 +199,19 @@
           'unformatted': ['a', 'sub', 'sup', 'b', 'i', 'u'],
           'preserve_newlines': true,
           'max_preserve_newlines': 5,
-          'indent_handlebars': false
+          'indent_handlebars': false,
+        };
+        var generalEditorOptions = {
+            lineNumbers: true,
+            viewportMargin: Infinity,
+            lineWrapping: false,
+            matchBrackets: true,
+            autoCloseBrackets: true,
+            matchTags: true,
+            showTrailingSpace: true,
+            autoCloseTags: true,
+            hint: true,
+            lint: true
         };
 
         // auto format / beautify the html code in html editor
@@ -211,7 +260,7 @@
 
         // Load the HTML of this App into the HTML and Jade Editor
         var showOwnCode = function () {
-            var htmlString = document.documentElement.innerHTML;
+            var htmlString = document.getElementById('aboutModal').innerHTML;
             var cleanHtmlString = html_beautify(htmlString, htmlBeautifyOptions);
             editor.setValue(cleanHtmlString);
             parseHTML();
@@ -252,21 +301,11 @@
         }
 
         $(document).ready(function() {
-            var optionsJade = {
-                lineNumbers: true,
-                mode: "jade",
-                viewportMargin: Infinity,
-                lineWrapping: false,
-            }
-            var options = {
-                lineNumbers: true,
-                mode: "htmlmixed",
-                viewportMargin: Infinity,
-                lineWrapping: false,
-            }
+            var optionsJade = jQuery.extend({mode: "jade"}, generalEditorOptions);
+            var optionsHtml = jQuery.extend({mode: "htmlmixed"}, generalEditorOptions);
             $('#container').layout(); // makes border drag-and-scaleable
             editorJade = CodeMirror.fromTextArea(document.getElementById("editor-jade"),optionsJade);
-            editor = CodeMirror.fromTextArea(document.getElementById("editor"),options);
+            editor = CodeMirror.fromTextArea(document.getElementById("editor"),optionsHtml);
         });
 
         $('#printModal').on('shown.bs.modal', function () {
